@@ -1,0 +1,50 @@
+Breakpoint 1 at 0x4005f3: file pa01.c, line 1.
+Starting program: /home/shay/b/jharned/ece264/ECE264Solutions/PA01/pa01 
+
+Breakpoint 1, printArray (array=0x7fffffffe230, len=8) at pa01.c:12
+12	    printf("{");
+Missing separate debuginfos, use: debuginfo-install glibc-2.12-1.132.el6_5.4.x86_64
+14	    for(ind = 0; ind < len; ++ind) {
+15		printf("%d", array[ind]);
+16		if(ind != len - 1) {
+17		    printf(", ");
+14	    for(ind = 0; ind < len; ++ind) {
+$1 = 0
+15		printf("%d", array[ind]);
+16		if(ind != len - 1) {
+17		    printf(", ");
+14	    for(ind = 0; ind < len; ++ind) {
+15		printf("%d", array[ind]);
+$2 = 2
+16		if(ind != len - 1) {
+17		    printf(", ");
+14	    for(ind = 0; ind < len; ++ind) {
+15		printf("%d", array[ind]);
+$3 = 3
+16		if(ind != len - 1) {
+17		    printf(", ");
+14	    for(ind = 0; ind < len; ++ind) {
+15		printf("%d", array[ind]);
+Continuing.
+
+Breakpoint 1, printArray (array=0x7fffffffe230, len=0) at pa01.c:12
+12	    printf("{");
+Continuing.
+
+Breakpoint 1, printArray (array=0x7fffffffe240, len=4) at pa01.c:12
+12	    printf("{");
+Continuing.
+
+Breakpoint 1, printArray (array=0x7fffffffe240, len=0) at pa01.c:12
+12	    printf("{");
+Continuing.
+
+Breakpoint 1, printArray (array=0x7fffffffe220, len=5) at pa01.c:12
+12	    printf("{");
+Continuing.
+
+Breakpoint 1, printArray (array=0x7fffffffe210, len=4) at pa01.c:12
+12	    printf("{");
+Continuing.
+
+Program exited normally.
