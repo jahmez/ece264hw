@@ -1,3 +1,15 @@
+commit 8737223d819bf34faddeb01a9dd788994e9e2b46
+Author: James Harned <jharned@purdue.edu>
+Date:   Fri Oct 3 20:27:49 2014 -0400
+
+    Adding grep-lite.c
+
+commit eee3fde1d0d6e40519ee8717184171ed7e07fd23
+Author: James Harned <jharned@purdue.edu>
+Date:   Fri Oct 3 20:07:39 2014 -0400
+
+    Completed cat-lite.c
+
 commit ffbc5a296dac9ceaba31102687c421c5b38c80ee
 Author: James Harned <jharned@purdue.edu>
 Date:   Fri Oct 3 18:13:25 2014 -0400

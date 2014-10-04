@@ -14,10 +14,11 @@ void helpmsg(){
 	printf("\n                    then g's contents.");
 	printf("\n  cat-lite          Copy standard input to standard output.\n");
 }
+
 int cat(const char * filename, FILE * output)
 {
 	int ch;
-	FILE * file;
+	FILE * file;//Initialize file pointer
 	//check for hypen
 	int check=(strcmp(filename,"-")==0);
 	if(check){
@@ -40,6 +41,8 @@ int cat(const char * filename, FILE * output)
 	}
 	return 1;
 }
+
+
 int main(int argc, char * * argv)
 {
 
@@ -61,10 +64,12 @@ int main(int argc, char * * argv)
 
     //Prints error message
     for(ind=1 ; ind < argc; ind++) {
- 	if(cat(argv[ind],stdout)==0){
+ 	
+	if(cat(argv[ind],stdout)==0){
 	    fprintf(stderr,"File %s could not be retrieved\n", argv[ind]);
 	    return EXIT_FAILURE;
 	}  
+    	
     }
     
 

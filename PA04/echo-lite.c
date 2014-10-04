@@ -4,11 +4,13 @@
 
 int main(int argc, char * * argv)
 {
-    int ind;
+    int ind;//Initialize index
 	
     //Based on code from example.c
     for(ind = 1; ind < argc; ind++) {
+	
 	printf("%s",argv[ind]);
+	
 	if(ind != (argc-1)){
 	    printf(" ");
 	}

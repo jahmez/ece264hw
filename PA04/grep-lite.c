@@ -12,58 +12,74 @@ void helpmsg(){
 int main(int argc, char * * argv)
 {
 	int ind;
+	int found = FALSE;
+	//Command Option Cases
 	int help = FALSE;
-	int invert = FALSE;
-	int lines = FALSE;
 	int quiet = FALSE;
-
-	const char * pattern = argv[argc-1];
+	int invertcase = FALSE;
+	int printlines = FALSE;
 
 	for(ind = 1; ind < argc-1; ind++)
 	{   
-	    //Go through and check for commands
-	    if(strcmp(argv[ind],"--help")) help=TRUE;
-	    else if(strcmp(argv[ind],"-v") || strcmp(argv[ind],"--invert-match")) invert=TRUE;
-	    else if(strcmp(argv[ind],"-n") || strcmp(argv[ind],"--line-number")) lines=TRUE;
-	    else if(strcmp(argv[ind],"-q") || strcmp(argv[ind],"--quiet")) quiet=TRUE;
+	    //Go through and check for cases(based on example.c)
+	    if(!strcmp(argv[ind],"--help")) help=TRUE;//Help case
+
+	    else if((!strcmp(argv[ind],"-v") || !strcmp(argv[ind],"--invert-match"))) invertcase=TRUE;//Inversion case
+	    
+	    else if((!strcmp(argv[ind],"-n") || !strcmp(argv[ind],"--line-number"))) printlines=TRUE;//Print lines case
+	    
+	    else if((!strcmp(argv[ind],"-q") || !strcmp(argv[ind],"--quiet"))) quiet=TRUE;//Quieted case
+	    
 	    else
 	    {
+		//Print error message
 		fprintf(stderr,"ERROR MESSAGE HERE");
-	    	return EXIT_FAILURE;
+	    	return(2);
 	    }
 	}
 
-	if(help || strcmp(pattern,"--help")==0)
+	const char * entered = argv[argc-1];
+
+	int linenum=0;
+
+	if(argc==1)
+	{
+	    //Print error message
+	    fprintf(stderr,"AN ERROR HAS OCCURED\n");
+	    return(2);
+	}
+	
+	//Test for help case
+	if(help || strcmp(entered,"--help")==0)
 	{
 	    helpmsg();
 	    return EXIT_SUCCESS;
 	}
-	if(argc==1)
-	{
-	    fprintf(stderr,"AN ERROR HAS OCCURED\n");
-	    return EXIT_FAILURE;
-	}
 
-	char buffer[2048];
-	int found=FALSE;
-	int currLine=0;
-	int matches=0;
+	
+	int matching=0;
 
-	while(fgets(buffer,2048,stdin)!=NULL){
-	    currLine++;
+	char buffer[2000];
+	
+
+	while(fgets(buffer,2000,stdin)!=NULL){
+	    linenum++;
 	    
-		matches=(strstr(buffer,pattern)!=NULL);
-	    if((matches && !invert) || (!matches && invert))
+	    matching=(strstr(buffer,entered)!=NULL);//Test for a match
+	    
+	    if((matching && !invertcase) || (!matching && invertcase))//found if matching or not matching with inversion
 	    {
 		found=TRUE;
 		
 		if(!quiet)
 		{
-		   if(lines) printf("%d: ",currLine);
-		   printf("%s ", buffer);
+		   if(printlines){
+			printf("%d: ",linenum);//Print out line number if case selected
+		   }
+		printf("%s ", buffer);//prints to console
 		}
 	    }
 	}
-
-	return found ? 0:1;
+	if(found) return 0;
+	else return 1;
 }
