@@ -4,66 +4,66 @@
 
 #define TRUE 1
 #define FALSE 0
-#define ERROR_RET 2
-#define MAX_BUFF 2048
+
+void helpmsg(){
+	printf("\nINSERT HELP MESSAGE");
+}
 
 int main(int argc, char * * argv)
 {
 	int ind;
-	int showHelp = FALSE;
-	int invertMatch = FALSE;
-	int lineNumber = FALSE;
+	int help = FALSE;
+	int invert = FALSE;
+	int lines = FALSE;
 	int quiet = FALSE;
+
 	const char * pattern = argv[argc-1];
 
 	for(ind = 1; ind < argc-1; ind++)
-	{
-	    #define ARGCMP(C) (strcmp(argv[ind],C)==0)
-	    if(ARGCMP("--help")) showHelp=TRUE;
-	    else if(ARGCMP("-v") || ARGCMP("--invert-match")) invertMatch=TRUE;
-	    else if(ARGCMP("-n") || ARGCMP("--line-number")) lineNumber=TRUE;
-	    else if(ARGCMP("-q") || ARGCMP("--quiet")) quiet=TRUE;
+	{   
+	    //Go through and check for commands
+	    if(strcmp(argv[ind],"--help")) help=TRUE;
+	    else if(strcmp(argv[ind],"-v") || strcmp(argv[ind],"--invert-match")) invert=TRUE;
+	    else if(strcmp(argv[ind],"-n") || strcmp(argv[ind],"--line-number")) lines=TRUE;
+	    else if(strcmp(argv[ind],"-q") || strcmp(argv[ind],"--quiet")) quiet=TRUE;
 	    else
 	    {
 		fprintf(stderr,"ERROR MESSAGE HERE");
-	    	return ERROR_RET;
+	    	return EXIT_FAILURE;
 	    }
-	    #undef ARGCMP
 	}
 
-	if(showHelp || strcmp(pattern,"--help")==0)
+	if(help || strcmp(pattern,"--help")==0)
 	{
-	    printHelp();
+	    helpmsg();
 	    return EXIT_SUCCESS;
 	}
 	if(argc==1)
 	{
-	    fprintf(stderr,"ERROR HAS OCCURED\n");
-	    return ERROR_RET;
+	    fprintf(stderr,"AN ERROR HAS OCCURED\n");
+	    return EXIT_FAILURE;
 	}
 
-	char buffer[MAX_BUFF];
+	char buffer[2048];
 	int found=FALSE;
 	int currLine=0;
 	int matches=0;
 
-	while(fgets(buffer,MAX_BUFF,stdin)!=NULL){
+	while(fgets(buffer,2048,stdin)!=NULL){
 	    currLine++;
-	    matches=(strstr(buffer,pattern)!=NULL);
-	    if((matches && !invertMatch) || (!matches && invertMatch))
+	    
+		matches=(strstr(buffer,pattern)!=NULL);
+	    if((matches && !invert) || (!matches && invert))
 	    {
 		found=TRUE;
+		
 		if(!quiet)
 		{
-		   if(lineNumber) printf("%d: ",currLine);
+		   if(lines) printf("%d: ",currLine);
 		   printf("%s ", buffer);
 		}
 	    }
 	}
 
 	return found ? 0:1;
-}
-
-void printHelp(){
-	printf("\n\nHELP MESSAGE");
 }
