@@ -1,3 +1,9 @@
+commit ce91cd795af19f080cb5e805c46543c47344d8c4
+Author: James Harned <jharned@purdue.edu>
+Date:   Fri Oct 3 21:54:48 2014 -0400
+
+    fixed grep-lite and tested with gdb
+
 commit 8737223d819bf34faddeb01a9dd788994e9e2b46
 Author: James Harned <jharned@purdue.edu>
 Date:   Fri Oct 3 20:27:49 2014 -0400

@@ -1,0 +1,38 @@
+No line 44 in file "echo-lite.c".
+Breakpoint 1 at 0x40052c: file echo-lite.c, line 10.
+Starting program: /home/shay/b/jharned/ece264/ECE264Solutions/ece264hw/PA04/echo-lite 
+
+Program exited normally.
+No symbol "argc" in current context.
+Breakpoint 2 at 0x400523: file echo-lite.c, line 3.
+Starting program: /home/shay/b/jharned/ece264/ECE264Solutions/ece264hw/PA04/echo-lite 
+
+Breakpoint 2, main (argc=1, argv=0x7fffffffe338) at echo-lite.c:9
+warning: Source file is more recent than executable.
+9	    //Based on code from example.c
+15		    printf(" ");
+17	    }
+18	    printf("\n");
+__libc_start_main (main=0x400514 <main>, argc=1, ubp_av=0x7fffffffe338, init=<value optimized out>, fini=<value optimized out>, rtld_fini=<value optimized out>, 
+    stack_end=0x7fffffffe328) at libc-start.c:258
+258	  exit (result);
+
+Program exited normally.
+Note: breakpoint 1 also set at pc 0x40052c.
+Breakpoint 3 at 0x40052c: file echo-lite.c, line 10.
+Starting program: /home/shay/b/jharned/ece264/ECE264Solutions/ece264hw/PA04/echo-lite 
+
+Breakpoint 2, main (argc=1, argv=0x7fffffffe338) at echo-lite.c:9
+9	    //Based on code from example.c
+$1 = 1
+$2 = (char **) 0x7fffffffe338
+15		    printf(" ");
+17	    }
+18	    printf("\n");
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Program not restarted.
+__libc_start_main (main=0x400514 <main>, argc=1, ubp_av=0x7fffffffe338, init=<value optimized out>, fini=<value optimized out>, rtld_fini=<value optimized out>, 
+    stack_end=0x7fffffffe328) at libc-start.c:258
+258	  exit (result);
+
+Program exited normally.
