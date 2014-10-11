@@ -1,3 +1,5 @@
+//James Adam Harned
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -29,11 +31,12 @@ void partitionAllHelper(int val, int *arr, int pos)
     }
 
     int ind;
-
+    //Branches through integers starting with 1
     for(ind = 1; ind <= val; ind++)
     {
-        arr[pos] = ind;
-        partitionAllHelper(val - ind, arr, pos+1);//Recursion case
+
+        arr[pos] = ind ;
+        partitionAllHelper(val - ind, arr, pos + 1);//Recursion case
     }
 }
 
@@ -48,15 +51,18 @@ void partitionIncHelper(int n, int *arr, int pos)
 {
     if(n == 0)
     {
-        printPart(arr,pos);
+        printPart(arr, pos);//Base case
         return;
     }
+
     int first;
     int start;
+    
     if(pos == 0)
     {
         start= 1;
     }
+    
     else(start = arr[pos-1]+1);
     for(first = start; first <= n; first++)
     {
@@ -65,14 +71,13 @@ void partitionIncHelper(int n, int *arr, int pos)
     }
 }
 
-void partitionIncreasing(int value)
+void partitionIncreasing(int val)
 {
-    int *arr = malloc (sizeof(int) * value);
-    partitionIncHelper(value,arr,0);
-    free(arr);
+    int *partArray = malloc (sizeof(int) * val);
+    partitionIncHelper(val,partArray,0);
+    free(partArray);
 }
 
-//PARTITION DECREASING INTEGERS//
 void partitionDecHelper(int n, int *arr, int pos)
 {
     if(n == 0)
@@ -95,14 +100,13 @@ void partitionDecHelper(int n, int *arr, int pos)
     }
 }
 
-void partitionDecreasing(int value)
+void partitionDecreasing(int val)
 {
-    int *arr = malloc (sizeof(int) * value);
-    partitionDecHelper(value,arr,0);
-    free(arr);
+    int *printArray = malloc ( sizeof(int) * val);
+    partitionDecHelper(val, printArray , 0);
+    free(printArray);
 }
 
-// PARTITION ODD INTEGERS//
 void partitionOddHelper(int n, int *arr, int pos)
 {
     if(n == 0)
@@ -118,14 +122,13 @@ void partitionOddHelper(int n, int *arr, int pos)
     }
 }
 
-void partitionOdd(int value)
+void partitionOdd(int val)
 {
-    int *arr = malloc (sizeof(int) * value);
-    partitionOddHelper(value,arr,0);
-    free(arr);
+    int *partArray = malloc ( sizeof(int) *  val);
+    partitionOddHelper(val,partArray,0);
+    free(partArray);
 }
 
-// PARTITION EVEN INTEGERS//
 void partitionEvenHelper(int n, int *arr, int pos)
 {
     if(n == 0)
@@ -141,14 +144,16 @@ void partitionEvenHelper(int n, int *arr, int pos)
     }
 }
 
-void partitionEven(int value)
+
+void partitionEven(int val)
 {
-    int *arr = malloc (sizeof(int) * value);
-    partitionEvenHelper(value,arr,0);
-    free(arr);
+    int *partArray = malloc ( sizeof(int)  * val) ;
+    
+    partitionEvenHelper(val ,partArray, 0);
+    
+	free(partArray);
 }
 
-// PARTITION EVEN INTEGERS//
 void partitionOddAndEvenHelper(int n, int *arr, int pos)
 {
     if(n == 0)
@@ -176,14 +181,13 @@ void partitionOddAndEvenHelper(int n, int *arr, int pos)
     }
 }
 
-void partitionOddAndEven(int value)
+void partitionOddAndEven(int val)
 {
-    int *arr = malloc (sizeof(int) * value);
-    partitionOddAndEvenHelper(value,arr,0);
-    free(arr);
+    int *partArray = malloc (sizeof(int) * val);
+    partitionOddAndEvenHelper(val,partArray,0);
+    free(partArray);
 }
 
-//PARTITION PRIME NUMBERS//
 
 int checkPrime(int n)
 {
@@ -214,6 +218,7 @@ void partitionPrimeHelper(int n, int *arr, int pos)
         return;
     }
     int first;
+
     for(first = 1; first <= n; first++)
     {
         arr[pos] = first;
@@ -224,10 +229,12 @@ void partitionPrimeHelper(int n, int *arr, int pos)
     }
 }
 
-void partitionPrime(int value)
+void partitionPrime(int val)
 {
-    int *arr = malloc (sizeof(int) * value);
-    partitionPrimeHelper(value,arr,0);
-    free(arr);
+    int *partArr = malloc (sizeof(int) * val);
+    
+    partitionPrimeHelper(val, partArr,  0);
+    
+    free(partArr);
 }
 
