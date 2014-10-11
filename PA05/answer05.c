@@ -14,7 +14,7 @@ void printPart(int *arr, int len)
     {
         if(ind != 0)
         {
-            printf(" + ");//Prints plus sign for all but first integer
+            printf(" + ");//Prints plus sign for all but counter integer
         }
         printf("%d", arr[ind]);//Prints integer value
     }
@@ -22,12 +22,13 @@ void printPart(int *arr, int len)
     printf("\n");
 }	
 
-void partitionAllHelper(int val, int *arr, int pos)
+void partitionAllInit(int val, int *arr, int pos)
 {
     if(val == 0)//Base case
     {
-        printPart(arr,pos);
-        return;
+        printPart(arr,pos);//Prints out integer array
+
+        return;//Base case
     }
 
     int ind;
@@ -35,60 +36,65 @@ void partitionAllHelper(int val, int *arr, int pos)
     for(ind = 1; ind <= val; ind++)
     {
 
-        arr[pos] = ind ;
-        partitionAllHelper(val - ind, arr, pos + 1);//Recursion case
+        arr[ pos] = ind ;
+        partitionAllInit(val - ind, arr, pos + 1);//Recursion case
     }
 }
 
-void partitionAll(int val)
+void partitionAll( int val)
 {
     int *partArray = malloc( sizeof(int) * val);//Array to store partition
-    partitionAllHelper(val,partArray,0);
-    free(partArray);
+    partitionAllInit(val ,partArray ,0);//Recursion process in seperate func
+    
+   free(partArray);
 }
 
-void partitionIncHelper(int n, int *arr, int pos)
+void  partitionIncInit(int ind, int * array, int pos)
 {
-    if(n == 0)
+    if( ind   == 0)
     {
-        printPart(arr, pos);//Base case
+        printPart(array, pos);//Base case
+        
         return;
     }
 
-    int first;
+    int counter;
+
     int start;
     
     if(pos == 0)
     {
         start= 1;
     }
-    
-    else(start = arr[pos-1]+1);
-    for(first = start; first <= n; first++)
+    //Recursive case
+    else(start = array[pos-1]+1);
+    for(counter = start; counter <= ind ; counter++)
     {
-        arr[pos] = first;
-        partitionIncHelper(n - first,arr,pos+1);
+        array[pos] = counter;
+        partitionIncInit(ind -  counter, array,pos + 1);
     }
 }
 
 void partitionIncreasing(int val)
 {
     int *partArray = malloc (sizeof(int) * val);
-    partitionIncHelper(val,partArray,0);
+    
+     partitionIncInit(val,partArray,0);
+    
     free(partArray);
 }
 
-void partitionDecHelper(int n, int *arr, int pos)
+void partitionDecInit(int ind, int *arr, int pos)
 {
-    if(n == 0)
+    if(ind  == 0)
     {
         printPart(arr,pos);
         return;
     }
-    int first;
-    for(first = 1; first <= n; first++)
+    int counter;
+    for(counter = 1; counter <= ind; counter++)
     {
-        arr[pos] = first;
+        arr[pos] = counter;
         if(pos)
         {
             if(arr[pos-1]<=arr[pos])
@@ -96,51 +102,51 @@ void partitionDecHelper(int n, int *arr, int pos)
                 return;
             }
         }
-        partitionDecHelper(n - first,arr,pos+1);
+        partitionDecInit(ind - counter,arr,pos+1);
     }
 }
 
 void partitionDecreasing(int val)
 {
     int *printArray = malloc ( sizeof(int) * val);
-    partitionDecHelper(val, printArray , 0);
+    partitionDecInit(val, printArray , 0);
     free(printArray);
 }
 
-void partitionOddHelper(int n, int *arr, int pos)
+void partitionOddInit(int ind, int *arr, int pos)
 {
-    if(n == 0)
+    if(ind  == 0)
     {
         printPart(arr,pos);
         return;
     }
-    int first;
-    for(first = 1; first <= n; first+=2)
+    int counter;
+    for(counter = 1; counter <= ind ; counter+=2)
     {
-        arr[pos] = first;
-        partitionOddHelper(n - first,arr,pos+1);
+        arr[pos] = counter;
+        partitionOddInit(ind  - counter,arr,pos+1);
     }
 }
 
 void partitionOdd(int val)
 {
     int *partArray = malloc ( sizeof(int) *  val);
-    partitionOddHelper(val,partArray,0);
+    partitionOddInit(val,partArray,0);
     free(partArray);
 }
 
-void partitionEvenHelper(int n, int *arr, int pos)
+void partitionEvenInit(int ind, int *arr, int pos)
 {
-    if(n == 0)
+    if(ind == 0)
     {
         printPart(arr,pos);
         return;
     }
-    int first;
-    for(first = 2; first <= n; first+=2)
+    int counter;
+    for(counter = 2 ;  counter <= ind; counter+=2 )
     {
-        arr[pos] = first;
-        partitionEvenHelper(n - first,arr,pos+1);
+        arr[pos] = counter;
+        partitionEvenInit(ind - counter, arr, pos+1);
     }
 }
 
@@ -149,20 +155,23 @@ void partitionEven(int val)
 {
     int *partArray = malloc ( sizeof(int)  * val) ;
     
-    partitionEvenHelper(val ,partArray, 0);
+    partitionEvenInit(val ,partArray, 0);
     
 	free(partArray);
 }
 
-void partitionOddAndEvenHelper(int n, int *arr, int pos)
+void partitionOddAndEvenInit(int ind, int *arr, int pos)
 {
-    if(n == 0)
+    if(ind  == 0)
     {
         printPart(arr,pos);
+        
         return;
     }
-    int first;
-    for(first = 1; first <= n; first++)
+    
+
+    int counter;
+    for(counter = 1; counter <= ind; counter++)
     {
         int pass = 1;
         if(pos == 0)
@@ -171,12 +180,12 @@ void partitionOddAndEvenHelper(int n, int *arr, int pos)
         }
         else
         {
-            pass = (arr[pos-1] % 2) != (first % 2);
+            pass = (arr[pos-1] % 2) != (counter % 2);
         }
         if(pass == 1)
         {
-            arr[pos] = first;
-            partitionOddAndEvenHelper(n - first,arr,pos+1);
+            arr[pos] = counter;
+            partitionOddAndEvenInit(ind - counter,arr,pos+1);
         }
     }
 }
@@ -184,47 +193,59 @@ void partitionOddAndEvenHelper(int n, int *arr, int pos)
 void partitionOddAndEven(int val)
 {
     int *partArray = malloc (sizeof(int) * val);
-    partitionOddAndEvenHelper(val,partArray,0);
+    partitionOddAndEvenInit(val,partArray,0);
     free(partArray);
 }
 
-
-int checkPrime(int n)
+//Checks if prime number, return 1 if so, otherwise 0
+int checkPrime( int ind)
 {
-    if(n<=1)
+
+    //Cases for 1 and 0
+    if(ind<=1)
     {
         return 0;
     }
-    if(n == 2)
+    
+    if(ind == 2)
     {
         return 1;
     }
-    int ind;
-    for(ind=2;ind<=n/2;ind++)
+
+
+    int primeinc;
+
+    //Testing for divisibility
+    for(primeinc=2; primeinc <= (ind/2); primeinc++)
     {
-        if(n%ind == 0)
+
+        if((ind%primeinc) == 0)
         {
             return 0;
         }
-    }
+   }
+
+
     return 1;
 }
 
-void partitionPrimeHelper(int n, int *arr, int pos)
+
+
+void partitionPrimeInit(int ind, int *arr, int pos)
 {
-    if(n == 0)
+    if(ind == 0)
     {
         printPart(arr,pos);
         return;
     }
-    int first;
+    int counter;
 
-    for(first = 1; first <= n; first++)
+    for(counter = 1; counter <= ind; counter++)
     {
-        arr[pos] = first;
+        arr[pos] = counter;
         if(checkPrime(arr[pos]))
         {
-            partitionPrimeHelper(n-first,arr,pos+1);
+            partitionPrimeInit( ind - counter, arr, pos+1);
         }
     }
 }
@@ -233,7 +254,7 @@ void partitionPrime(int val)
 {
     int *partArr = malloc (sizeof(int) * val);
     
-    partitionPrimeHelper(val, partArr,  0);
+    partitionPrimeInit(val, partArr,  0);
     
     free(partArr);
 }
